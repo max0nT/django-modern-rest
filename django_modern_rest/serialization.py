@@ -33,6 +33,7 @@ class BaseSerializer:
 
     # API that have defaults:
     content_type: ClassVar[str] = 'application/json'
+    format_type: str = 'json'
 
     @classmethod
     @abc.abstractmethod
@@ -61,7 +62,11 @@ class BaseSerializer:
 
     @classmethod
     @abc.abstractmethod
-    def deserialize(cls, buffer: 'FromJson') -> Any:
+    def deserialize(
+        cls,
+        buffer: 'FromJson',
+        target_type: type[Any],
+    ) -> Any:
         """Convert json bytestring to structured data."""
         raise NotImplementedError
 
@@ -76,6 +81,7 @@ class BaseSerializer:
 
         Only add types that are common for all potential plugins here.
         Should be called inside :meth:`deserialize`.
+
         """
         raise RequestSerializationError(
             f'Value {to_deserialize} of type {type(to_deserialize)} '

@@ -175,7 +175,7 @@ class ResponseValidator:
 
         """
         if response:
-            structured = self.serializer.deserialize(structured)
+            structured = self.serializer.deserialize(structured, None)
 
         try:
             self.serializer.from_python(

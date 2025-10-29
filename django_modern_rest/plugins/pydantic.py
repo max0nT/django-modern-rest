@@ -178,7 +178,11 @@ class PydanticSerializer(BaseSerializer):
 
     @override
     @classmethod
-    def deserialize(cls, buffer: 'FromJson') -> Any:
+    def deserialize(
+        cls,
+        buffer: 'FromJson',
+        target_type: type[Any],
+    ) -> Any:
         """
         Convert string or bytestring to simple python object.
 

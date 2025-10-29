@@ -162,7 +162,7 @@ class Body(ComponentParser, Generic[_BodyT]):
                 ),
             )
         try:
-            return serializer.deserialize(request.body)
+            return serializer.deserialize(request.body, model)
         except DataParsingError as exc:
             raise RequestSerializationError(
                 serializer.error_serialize(str(exc)),
